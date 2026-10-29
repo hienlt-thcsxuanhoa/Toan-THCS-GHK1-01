@@ -77,7 +77,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
         @media print {
-            header, footer, button, nav, #custom-modal, #qr-modal, #essay-modal, .no-print, #auth-modal { display: none !important; }
+            header, footer, button, nav, #custom-modal, #qr-modal, #essay-modal, .no-print, #auth-modal, #banner-wrapper { display: none !important; }
             body { background: white !important; background-image: none !important; }
             main { max-width: none !important; padding: 0 !important; width: 100% !important; }
             #screen-teacher, #screen-bgh { display: block !important; }
@@ -89,56 +89,83 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
 
-    <!-- Header Navigation Tích hợp thiết kế mới -->
-    <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-slate-200 transition-all duration-200">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center p-3 sm:p-4 gap-4">
-            
-            <!-- School Header Design with SVG Math Logo -->
-            <div class="flex items-center gap-[10px] sm:gap-4 w-full md:w-auto">
-                
-                <!-- SVG Math Icon (Luôn hiển thị) -->
-                <div class="w-[68px] h-[68px] sm:w-[80px] sm:h-[80px] shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-[#1557A6]">
-                        <rect width="100" height="100" rx="22" fill="#e0f2fe"/>
-                        <circle cx="50" cy="50" r="42" fill="white" stroke="#1557A6" stroke-width="3"/>
-                        <path d="M25 55 l12 12 l18 -40 h25" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-                        <text x="63" y="70" font-family="'Times New Roman', Times, serif" font-size="34" font-weight="bold" fill="currentColor" font-style="italic">x</text>
-                    </svg>
-                </div>
+    <!-- Wrapper Banner Trong Suốt (Chứa cả Topbar và Header) -->
+    <div id="banner-wrapper" class="sticky top-0 z-40 shadow-xl border-b border-[#0c4a6e] transition-all duration-200 relative">
+        
+        <!-- Ảnh nền Toán học & Lớp phủ kính mờ (Glassmorphism) -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="Ky-hieu-trong-hinh-hoc.jpg" class="w-full h-full object-cover opacity-60" alt="Background Toán học" onerror="this.style.display='none'">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#075985]/90 to-[#0c4a6e]/85 backdrop-blur-[3px]"></div>
+        </div>
 
-                <div class="flex flex-col">
-                    <h1 class="text-[#1557A6] font-bold text-lg sm:text-[clamp(18px,2.5vw,28px)] m-0 leading-tight">TRƯỜNG THCS XUÂN HÒA</h1>
-                    <p class="text-[#42634D] text-[13px] sm:text-[15px] mt-0.5 sm:mt-1 m-0 font-medium">Đổi mới sáng tạo – Chắp cánh tương lai</p>
-                    <div class="mt-1.5 sm:mt-2">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 border border-blue-100 text-[#1557A6] text-[10px] sm:text-[11px] font-black tracking-wide">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            GIÁO VIÊN BIÊN SOẠN: LƯU TUẤN HIỆN
-                        </span>
+        <!-- Nội dung Banner (Z-index cao hơn ảnh nền) -->
+        <div class="relative z-10">
+            <!-- Thanh thông tin phụ (Topbar) -->
+            <div class="border-b border-white/10 text-sky-100 text-[11px] sm:text-xs py-1.5 px-4 flex justify-between items-center">
+                <div class="max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-4">
+                    <!-- Đồng hồ thời gian thực -->
+                    <div class="flex items-center gap-1.5 font-medium tracking-wide">
+                        <svg class="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span id="realtime-clock">Đang tải thời gian...</span>
+                    </div>
+                    
+                    <!-- Thời tiết Xuân Hòa -->
+                    <div class="flex items-center gap-1.5 font-medium tracking-wide bg-black/20 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/5">
+                        <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                        <span>Xuân Hòa, Lào Cai: <strong id="weather-temp" class="text-amber-300">--°C</strong></span>
                     </div>
                 </div>
             </div>
 
-            <!-- Role Nav Switcher & Timer -->
-            <div class="flex flex-wrap items-center justify-between w-full md:w-auto gap-3">
-                <nav class="flex justify-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80" aria-label="Điều hướng hệ thống">
-                    <button type="button" onclick="navigateToRole('student')" id="nav-student" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-sky-700 shadow-sm cursor-pointer">Học sinh</button>
-                    <button type="button" onclick="navigateToRole('teacher')" id="nav-teacher" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 cursor-pointer">Giáo viên</button>
-                    <button type="button" onclick="navigateToRole('bgh')" id="nav-bgh" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 cursor-pointer">BGH</button>
-                </nav>
-
-                <!-- Timer View -->
-                <div id="exam-timer" class="hidden font-mono font-bold bg-amber-50 border border-amber-200/80 px-3 py-1.5 rounded-xl shadow-sm text-amber-700 text-sm flex items-center gap-2">
-                    <svg class="w-4 h-4 text-amber-600 animate-spin" style="animation-duration: 8s;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9" stroke-width="2" stroke-dasharray="4 2"></circle>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 2"></path>
-                    </svg>
-                    <span id="timer-text">90:00</span>
+            <!-- Header Navigation Chính -->
+            <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center p-3 sm:p-4 gap-4">
+                
+                <!-- Left: Logo Toán học (Đã chỉnh màu cho nền tối) -->
+                <div class="w-full md:w-auto flex justify-center md:justify-start shrink-0 drop-shadow-md">
+                    <div class="w-[60px] h-[60px] sm:w-[72px] sm:h-[72px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-white">
+                            <rect width="100" height="100" rx="22" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <path d="M25 55 l12 12 l18 -40 h25" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="63" y="70" font-family="'Times New Roman', Times, serif" font-size="34" font-weight="bold" fill="currentColor" font-style="italic">x</text>
+                        </svg>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </header>
 
-    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+                <!-- Center: Tiêu đề trường -->
+                <div class="flex-1 flex flex-col items-center text-center w-full">
+                    <h1 class="text-white font-black text-[16px] sm:text-xl md:text-[22px] m-0 leading-tight tracking-tight drop-shadow-lg">TRƯỜNG THCS XUÂN HÒA - PHÂN HIỆU TÂN DƯƠNG</h1>
+                    <p class="text-sky-200 text-[12px] sm:text-[14px] mt-1 m-0 font-semibold italic drop-shadow-md">"Đổi mới sáng tạo – Chắp cánh tương lai"</p>
+                    <div class="mt-2.5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-[11px] font-black tracking-widest shadow-sm">
+                            <svg class="w-3 h-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                            GIÁO VIÊN BIÊN SOẠN: LƯU TUẤN HIỆN
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right: Role Nav Switcher & Timer -->
+                <div class="w-full md:w-auto flex flex-wrap md:flex-col items-center md:items-end justify-center gap-2 md:gap-3 shrink-0">
+                    <nav class="flex justify-center gap-1 bg-black/20 backdrop-blur-md p-1 rounded-xl border border-white/10 shadow-inner" aria-label="Điều hướng hệ thống">
+                        <button type="button" onclick="navigateToRole('student')" id="nav-student" class="px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all bg-sky-500 text-white shadow-sm cursor-pointer">Học sinh</button>
+                        <button type="button" onclick="navigateToRole('teacher')" id="nav-teacher" class="px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer">Giáo viên</button>
+                        <button type="button" onclick="navigateToRole('bgh')" id="nav-bgh" class="px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer">BGH</button>
+                    </nav>
+
+                    <!-- Timer View -->
+                    <div id="exam-timer" class="hidden font-mono font-bold bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1 sm:py-1.5 rounded-xl shadow-lg text-amber-400 text-xs sm:text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-400 animate-spin" style="animation-duration: 8s;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" stroke-width="2" stroke-dasharray="4 2"></circle>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 2"></path>
+                        </svg>
+                        <span id="timer-text">90:00</span>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center relative z-10 mt-4">
         
         <!-- Màn hình 0: Đăng nhập -->
         <div id="screen-login" class="fade-in bg-white rounded-3xl shadow-xl shadow-slate-200/60 p-6 sm:p-10 max-w-md w-full mx-auto my-auto border border-slate-100 relative overflow-hidden">
@@ -148,33 +175,33 @@
                 <!-- VỊ TRÍ LOGO MÀN HÌNH ĐĂNG NHẬP -->
                 <div class="mx-auto mb-5 animate-float flex justify-center">
                     <div class="w-24 h-24 rounded-2xl shadow-sm border border-slate-100 p-1.5 bg-white mx-auto flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-[#1557A6]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full text-[#0c4a6e]">
                             <rect width="100" height="100" rx="22" fill="#e0f2fe"/>
-                            <circle cx="50" cy="50" r="42" fill="white" stroke="#1557A6" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="42" fill="white" stroke="currentColor" stroke-width="3"/>
                             <path d="M25 55 l12 12 l18 -40 h25" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
                             <text x="63" y="70" font-family="'Times New Roman', Times, serif" font-size="34" font-weight="bold" fill="currentColor" font-style="italic">x</text>
                         </svg>
                     </div>
                 </div>
 
-                <h2 class="text-xl sm:text-2xl font-black text-[#1557A6] tracking-tight">CỔNG THI TRỰC TUYẾN</h2>
+                <h2 class="text-xl sm:text-2xl font-black text-[#0c4a6e] tracking-tight">CỔNG THI TRỰC TUYẾN</h2>
                 <p class="text-xs text-slate-500 mt-1">Vui lòng điền thông tin học sinh để bắt đầu làm bài</p>
             </div>
 
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="student-name">Họ và tên học sinh <span class="text-rose-500">*</span></label>
-                    <input type="text" id="student-name" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#1557A6] focus:ring-4 focus:ring-[#1557A6]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="Nguyễn Văn An">
+                    <input type="text" id="student-name" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#0c4a6e] focus:ring-4 focus:ring-[#0c4a6e]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="Nguyễn Văn An">
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="student-class">Lớp <span class="text-rose-500">*</span></label>
-                    <input type="text" id="student-class" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#1557A6] focus:ring-4 focus:ring-[#1557A6]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="9A1">
+                    <input type="text" id="student-class" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#0c4a6e] focus:ring-4 focus:ring-[#0c4a6e]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="9A1">
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="student-campus">Phân hiệu trường (tùy chọn)</label>
-                    <input type="text" id="student-campus" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#1557A6] focus:ring-4 focus:ring-[#1557A6]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="Phân hiệu Tân Dương">
+                    <input type="text" id="student-campus" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-[#0c4a6e] focus:ring-4 focus:ring-[#0c4a6e]/10 focus:outline-none transition font-medium text-slate-800 bg-slate-50/50 text-sm" placeholder="Phân hiệu Tân Dương">
                 </div>
-                <button type="submit" class="w-full bg-[#1557A6] hover:bg-blue-800 active:scale-[0.99] text-white font-bold py-3.5 rounded-xl shadow-md transition duration-200 mt-2 flex items-center justify-center gap-2 text-sm cursor-pointer">
+                <button type="submit" class="w-full bg-gradient-to-r from-[#0c4a6e] to-[#075985] hover:from-[#08334c] hover:to-[#054366] active:scale-[0.99] text-white font-bold py-3.5 rounded-xl shadow-md transition duration-200 mt-2 flex items-center justify-center gap-2 text-sm cursor-pointer">
                     <span>Xác Nhận & Vào Chọn Đề</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
@@ -183,7 +210,7 @@
 
         <!-- Màn hình 1: Trang chủ / Chọn đề -->
         <div id="screen-home" class="hidden fade-in bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-10 text-center my-auto">
-            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 mb-6 inline-flex flex-wrap items-center justify-center gap-3 text-[#1557A6] text-xs sm:text-sm">
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 mb-6 inline-flex flex-wrap items-center justify-center gap-3 text-[#0c4a6e] text-xs sm:text-sm">
                 <span class="font-bold flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     <span id="display-student-name" class="font-extrabold"></span>
@@ -192,7 +219,7 @@
                 <span class="font-medium">Lớp: <span id="display-student-class" class="font-bold"></span></span>
                 <span id="display-sbd-wrapper" class="hidden"><span class="text-blue-200">•</span> <span class="font-medium">SBD: <span id="display-student-sbd" class="font-bold"></span></span></span>
                 <span id="display-campus-wrapper" class="hidden"><span class="text-blue-200">•</span> <span class="font-medium">Phân hiệu: <span id="display-student-campus" class="font-bold"></span></span></span>
-                <button onclick="logoutStudent()" class="text-xs bg-white border border-blue-200 hover:bg-blue-100 text-[#1557A6] font-bold px-2.5 py-1 rounded-lg transition ml-2 cursor-pointer">Sửa thông tin</button>
+                <button onclick="logoutStudent()" class="text-xs bg-white border border-blue-200 hover:bg-blue-100 text-[#0c4a6e] font-bold px-2.5 py-1 rounded-lg transition ml-2 cursor-pointer">Sửa thông tin</button>
             </div>
 
             <div class="mb-8">
@@ -200,7 +227,7 @@
                 <p class="text-slate-500 text-xs sm:text-sm mt-1 mb-5">Chương trình GDPT 2018 • Cấu trúc chuẩn theo Bảng đặc tả và Ma trận</p>
                 
                 <div class="flex justify-center gap-2 max-w-md mx-auto bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                    <button onclick="switchGrade(6)" id="grade-btn-6" class="flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer bg-white text-[#1557A6] shadow-sm">Khối 6</button>
+                    <button onclick="switchGrade(6)" id="grade-btn-6" class="flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer bg-white text-[#0c4a6e] shadow-sm">Khối 6</button>
                     <button onclick="switchGrade(7)" id="grade-btn-7" class="flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer text-slate-600 hover:text-slate-900">Khối 7</button>
                     <button onclick="switchGrade(8)" id="grade-btn-8" class="flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer text-slate-600 hover:text-slate-900">Khối 8</button>
                     <button onclick="switchGrade(9)" id="grade-btn-9" class="flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer text-slate-600 hover:text-slate-900">Khối 9</button>
@@ -249,7 +276,7 @@
                 </div>
 
                 <div class="mt-12 pt-6 border-t border-slate-100 flex justify-center">
-                    <button onclick="confirmSubmit()" class="bg-[#1557A6] hover:bg-blue-800 active:scale-95 text-white font-extrabold text-base sm:text-lg px-8 sm:px-12 py-3.5 rounded-2xl shadow-lg shadow-blue-600/20 transition duration-200 flex items-center gap-2 cursor-pointer">
+                    <button onclick="confirmSubmit()" class="bg-[#0c4a6e] hover:bg-[#08334c] active:scale-95 text-white font-extrabold text-base sm:text-lg px-8 sm:px-12 py-3.5 rounded-2xl shadow-lg shadow-[#0c4a6e]/20 transition duration-200 flex items-center gap-2 cursor-pointer">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Hoàn Thành & Nộp Bài
                     </button>
@@ -381,7 +408,7 @@
                     <input type="password" id="auth-password" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 focus:outline-none transition text-sm font-bold bg-slate-50" placeholder="Nhập mật khẩu...">
                     <p id="auth-error" class="hidden text-xs text-rose-500 mt-2 font-semibold">Sai mật khẩu! Vui lòng thử lại.</p>
                 </div>
-                <button type="submit" class="w-full bg-[#1557A6] hover:bg-blue-800 active:scale-[0.99] text-white font-bold py-3 rounded-xl shadow-md transition duration-200 mt-2 text-sm cursor-pointer">Xác Nhận</button>
+                <button type="submit" class="w-full bg-[#0c4a6e] hover:bg-[#075985] active:scale-[0.99] text-white font-bold py-3 rounded-xl shadow-md transition duration-200 mt-2 text-sm cursor-pointer">Xác Nhận</button>
             </form>
         </div>
     </div>
@@ -394,11 +421,11 @@
         </div>
     </div>
 
-    <!-- Footer đã được cập nhật thông tin -->
+    <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 text-slate-500 text-xs mt-12 py-6 px-4 sm:px-8">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-center md:text-left space-y-0.5">
-                <p class="font-bold text-[#1557A6]">TRƯỜNG THCS XUÂN HÒA - PHÂN HIỆU TÂN DƯƠNG</p>
+                <p class="font-bold text-[#0c4a6e]">TRƯỜNG THCS XUÂN HÒA - PHÂN HIỆU TÂN DƯƠNG</p>
                 <p class="text-[#42634D] text-[11px] font-medium">Địa chỉ: Bản Tân Dương, xã Xuân Hòa, tỉnh Lào Cai • Hotline/Zalo: 0977460100</p>
             </div>
             <div class="text-center md:text-right space-y-0.5">
@@ -409,6 +436,33 @@
 
     <!-- Script JS Logic -->
     <script>
+        // --- XỬ LÝ THỜI GIAN THỰC & THỜI TIẾT ---
+        function updateRealTimeClock() {
+            const now = new Date();
+            const days = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+            const day = days[now.getDay()];
+            const date = now.toLocaleDateString('vi-VN');
+            const time = now.toLocaleTimeString('vi-VN', { hour12: false });
+            document.getElementById('realtime-clock').innerText = `${day}, ${date} - ${time}`;
+        }
+        setInterval(updateRealTimeClock, 1000);
+        updateRealTimeClock();
+
+        async function fetchWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=22.38&longitude=104.38&current_weather=true');
+                const data = await res.json();
+                if (data && data.current_weather) {
+                    const temp = data.current_weather.temperature;
+                    document.getElementById('weather-temp').innerText = `${temp}°C`;
+                }
+            } catch (e) {
+                document.getElementById('weather-temp').innerText = '--°C';
+            }
+        }
+        fetchWeather();
+        // ----------------------------------------
+
         let studentInfo = { name: '', studentClass: '', sbd: '', campus: '' };
         let currentGrade = 6;
         let currentCode = '601';
@@ -547,7 +601,6 @@
             }, 50);
         }
 
-        // CÁC HÀM UI VÀ XỬ LÝ SỰ KIỆN
         function handleLogin(e) {
             e.preventDefault();
             studentInfo.name = document.getElementById('student-name').value.trim();
@@ -583,7 +636,7 @@
             [6, 7, 8, 9].forEach(g => {
                 const btn = document.getElementById(`grade-btn-${g}`);
                 if(btn) {
-                    btn.className = (g === grade) ? "flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer bg-white text-[#1557A6] shadow-sm" : "flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer text-slate-600 hover:text-slate-900";
+                    btn.className = (g === grade) ? "flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer bg-white text-[#0c4a6e] shadow-sm" : "flex-1 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer text-slate-600 hover:text-slate-900";
                 }
             });
             initApp();
@@ -631,7 +684,7 @@
             const container = document.getElementById('exam-content');
             let html = '';
             
-            html += `<section class="space-y-4"><h3 class="text-sm font-black text-[#1557A6] bg-blue-50 px-3 py-2 rounded-xl border border-blue-100 uppercase tracking-wide">Phần I. Trắc nghiệm lựa chọn (3.0 Điểm)</h3><div class="space-y-4">`;
+            html += `<section class="space-y-4"><h3 class="text-sm font-black text-[#0c4a6e] bg-blue-50 px-3 py-2 rounded-xl border border-blue-100 uppercase tracking-wide">Phần I. Trắc nghiệm lựa chọn (3.0 Điểm)</h3><div class="space-y-4">`;
             data.part1.forEach((q, i) => {
                 html += `<div class="p-4 bg-slate-50/50 rounded-2xl border border-slate-200"><p class="font-semibold text-sm mb-3 text-slate-800">Câu ${i+1}: ${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">`;
                 q.opts.forEach((opt, j) => {
