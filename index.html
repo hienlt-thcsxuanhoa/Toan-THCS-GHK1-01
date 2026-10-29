@@ -302,6 +302,7 @@
                         <button onclick="exportResultsExcel()" class="px-3.5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition cursor-pointer">Xuất Excel</button>
                         <button onclick="exportResultsPDF()" class="px-3.5 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 transition cursor-pointer">Xuất PDF</button>
                         <button onclick="renderTeacherDashboard()" class="px-3.5 py-2 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 text-xs font-bold hover:bg-indigo-100 transition cursor-pointer">Làm mới</button>
+                        <button onclick="logoutAdmin('teacher')" class="px-3.5 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold hover:bg-slate-900 transition cursor-pointer">Đăng xuất</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="teacher-stat-cards"></div>
@@ -395,8 +396,13 @@
         <!-- GIAO DIỆN BAN GIÁM HIỆU -->
         <section id="screen-bgh" class="hidden fade-in space-y-6">
             <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
-                <p class="text-[11px] uppercase tracking-widest font-extrabold text-amber-600">Báo cáo Ban Giám hiệu</p>
-                <h2 class="text-2xl font-black text-slate-800 mt-0.5">Thống kê toàn trường</h2>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-widest font-extrabold text-amber-600">Báo cáo Ban Giám hiệu</p>
+                        <h2 class="text-2xl font-black text-slate-800 mt-0.5">Thống kê toàn trường</h2>
+                    </div>
+                    <button onclick="logoutAdmin('bgh')" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold hover:bg-slate-900 transition cursor-pointer">Đăng xuất BGH</button>
+                </div>
                 <div id="bgh-stat-cards" class="grid grid-cols-2 lg:grid-cols-3 gap-3.5 mt-5"></div>
             </div>
 
@@ -441,6 +447,31 @@
         </div>
     </div>
 
+    <!-- Login Admin Modal -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs p-4 items-center justify-center">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-sm relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-600 text-2xl font-bold cursor-pointer">&times;</button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-indigo-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="text-lg font-black text-slate-800">Xác Thực Quản Trị</h3>
+                <p class="text-xs text-slate-500 mt-1">Đăng nhập không gian <span id="auth-role-name" class="font-bold text-slate-700"></span></p>
+            </div>
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="auth-password">Mật khẩu truy cập <span class="text-rose-500">*</span></label>
+                    <input type="password" id="auth-password" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 focus:outline-hidden transition text-sm font-bold bg-slate-50" placeholder="Nhập mật khẩu...">
+                    <p id="auth-error" class="hidden text-xs text-rose-500 mt-2 font-semibold">Sai mật khẩu! Vui lòng thử lại.</p>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-bold py-3 rounded-xl shadow-md transition duration-200 mt-2 text-sm cursor-pointer">Xác Nhận</button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-[10px] text-slate-400">Gợi ý pass Giáo viên: giaovien123<br>Gợi ý pass BGH: bgh123</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Notification Modal -->
     <div id="custom-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 transition-opacity duration-200 opacity-0">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl transform scale-95 transition-transform duration-200 border border-slate-100" id="modal-panel">
@@ -473,6 +504,15 @@
         let isExamActive = false;
         let cheatWarnings = 0;
         let examStartTime = 0; // Epoch timestamp when exam started
+
+        // Quản lý xác thực
+        let isTeacherAuthed = false;
+        let isBghAuthed = false;
+        let pendingRole = null;
+        const ADMIN_PASSWORDS = {
+            teacher: 'giaovien123',
+            bgh: 'bgh123'
+        };
 
         // Anti-cheat visibility listener (Chống gian lận khi thoát màn hình / chuyển tab)
         document.addEventListener("visibilitychange", handleAntiCheatViolation);
@@ -993,6 +1033,21 @@
         }
 
         function navigateToRole(role) {
+            if (isExamActive) {
+                showModal('Đang thi!', 'Bạn đang trong quá trình làm bài thi, không thể chuyển sang không gian khác.', [{ text: 'Tiếp tục làm bài', class: 'bg-emerald-600 text-white w-full font-bold', onClick: hideModal }]);
+                return;
+            }
+
+            // Kiểm tra phân quyền trước khi cho phép xem
+            if (role === 'teacher' && !isTeacherAuthed) {
+                showAuthModal('teacher');
+                return;
+            }
+            if (role === 'bgh' && !isBghAuthed) {
+                showAuthModal('bgh');
+                return;
+            }
+
             ['screen-login', 'screen-home', 'screen-exam', 'screen-result', 'screen-teacher', 'screen-bgh'].forEach(id => {
                 document.getElementById(id)?.classList.add('hidden');
             });
@@ -1004,9 +1059,51 @@
                 document.getElementById('screen-bgh').classList.remove('hidden');
                 renderBGHDashboard();
             } else {
-                document.getElementById('screen-login').classList.remove('hidden');
+                if(studentInfo.name) {
+                    document.getElementById('screen-home').classList.remove('hidden');
+                } else {
+                    document.getElementById('screen-login').classList.remove('hidden');
+                }
             }
         }
+
+        // --- AUTHENTICATION LOGIC ---
+        function showAuthModal(role) {
+            pendingRole = role;
+            document.getElementById('auth-role-name').innerText = role === 'teacher' ? 'Giáo viên' : 'Ban Giám hiệu';
+            document.getElementById('auth-password').value = '';
+            document.getElementById('auth-error').classList.add('hidden');
+            const m = document.getElementById('auth-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function closeAuthModal() {
+            const m = document.getElementById('auth-modal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+            pendingRole = null;
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const pass = document.getElementById('auth-password').value;
+            if (pass === ADMIN_PASSWORDS[pendingRole]) {
+                if (pendingRole === 'teacher') isTeacherAuthed = true;
+                if (pendingRole === 'bgh') isBghAuthed = true;
+                closeAuthModal();
+                navigateToRole(pendingRole); // Kích hoạt chuyển trang
+            } else {
+                document.getElementById('auth-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin(role) {
+            if (role === 'teacher') isTeacherAuthed = false;
+            if (role === 'bgh') isBghAuthed = false;
+            navigateToRole('student');
+        }
+        // -----------------------------
 
         function renderTeacherDashboard() {
             const results = JSON.parse(localStorage.getItem('xuanhoa_results') || '[]');
