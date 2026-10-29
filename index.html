@@ -546,6 +546,132 @@
                     { q: "<strong>Bài 2 (1,0 điểm).</strong><br>Một sân trường hình chữ nhật có chiều dài $50\\text{ m}$, chiều rộng $30\\text{ m}$.<br>a) Tính diện tích của sân trường đó.<br>b) Nhà trường dự định lát gạch toàn bộ sân trường với giá $120.000$ đ/m$^2$. Tính chi phí lát gạch.", guide: "a) $S = 50 \\cdot 30 = 1500\\text{ m}^2$.<br>b) Chi phí: $1500 \\cdot 120.000 = 180.000.000$ đ." },
                     { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Cho tổng $A = 1 + 3 + 3^2 + 3^3 + \\dots + 3^{11}$. Chứng tỏ $A$ chia hết cho $4$.", guide: "Gộp nhóm 2 số hạng liên tiếp để xuất hiện thừa số $(1+3)=4$." }
                 ]
+            },
+            "701": {
+                grade: 7,
+                part1: [
+                    { q: "Khẳng định nào sau đây là đúng về tập hợp các số hữu tỉ $\\mathbb{Q}$?", opts: ["Số hữu tỉ là số viết được dưới dạng phân số $\\frac{a}{b}$ với $a, b \\in \\mathbb{Z}, b \\neq 0$.", "Mọi số thực đều là số tự nhiên.", "Số $0$ không phải là số hữu tỉ.", "Tập hợp số hữu tỉ không chứa các số nguyên âm."], ans: 0 },
+                    { q: "Số đối của số hữu tỉ $-\\frac{3}{5}$ là:", opts: ["$\\frac{3}{5}$", "$-\\frac{5}{3}$", "$\\frac{5}{3}$", "$-\\frac{3}{5}$"], ans: 0 },
+                    { q: "Kết quả của phép tính $\\left(-\\frac{1}{2}\\right)^3$ là:", opts: ["$-\\frac{1}{8}$", "$\\frac{1}{8}$", "$-\\frac{1}{6}$", "$\\frac{1}{6}$"], ans: 0 },
+                    { q: "Cho $\\sqrt{x} = 4$ thì giá trị của $x$ là:", opts: ["$16$", "$2$", "$8$", "$-16$"], ans: 0 },
+                    { q: "Trong các số sau, số nào là số vô tỉ?", opts: ["$\\sqrt{2}$", "$\\sqrt{4}$", "$\\frac{1}{3}$", "$0{,}5$"], ans: 0 },
+                    { q: "Căn bậc hai số học của $81$ là:", opts: ["$9$", "$-9$", "$\\pm 9$", "$81$"], ans: 0 },
+                    { q: "Hai góc kề bù có tổng số đo bằng:", opts: ["$180^\\circ$", "$90^\\circ$", "$360^\\circ$", "$120^\\circ$"], ans: 0 },
+                    { q: "Hai đường thẳng phân biệt cùng vuông góc với đường thẳng thứ ba thì:", opts: ["Song song với nhau", "Vuông góc với nhau", "Cắt nhau", "Trùng nhau"], ans: 0 },
+                    { q: "Tổng số đo ba góc trong một tam giác bằng:", opts: ["$180^\\circ$", "$360^\\circ$", "$90^\\circ$", "$120^\\circ$"], ans: 0 },
+                    { q: "Nếu $\\Delta ABC = \\Delta DEF$ thì cạnh tương ứng với cạnh $AB$ là:", opts: ["$DE$", "$DF$", "$EF$", "$BC$"], ans: 0 },
+                    { q: "Cho $\\Delta ABC$ vuông tại $A$, có $\\widehat{B} = 55^\\circ$. Số đo góc $C$ là:", opts: ["$35^\\circ$", "$45^\\circ$", "$55^\\circ$", "$145^\\circ$"], ans: 0 },
+                    { q: "Khẳng định nào sau đây đúng về hai góc đối đỉnh?", opts: ["Hai góc đối đỉnh thì bằng nhau.", "Hai góc bằng nhau thì đối đỉnh.", "Hai góc đối đỉnh có tổng bằng $180^\\circ$.", "Hai góc kề bù là hai góc đối đỉnh."], ans: 0 }
+                ],
+                part2: [
+                    { context: "Cho biểu thức $A = \\left|x - \\frac{1}{2}\\right| + \\frac{3}{4}$. Xét tính đúng sai của các khẳng định sau:", statements: [
+                        { text: "a) Giá trị tuyệt đối của một số hữu tỉ luôn không âm.", ans: true },
+                        { text: "b) Khi $x = \\frac{1}{2}$ thì $A = \\frac{3}{4}$.", ans: true },
+                        { text: "c) Biểu thức $A$ nhận giá trị nhỏ nhất là $\\frac{3}{4}$.", ans: true },
+                        { text: "d) Có giá trị nào của $x$ để $A = 0$.", ans: false }
+                    ]},
+                    { context: "Cho tam giác $ABC$ có $AB = AC$. Gọi $M$ là trung điểm của cạnh $BC$. Xét tính đúng sai:", statements: [
+                        { text: "a) $\\Delta AMB = \\Delta AMC$ (c-c-c).", ans: true },
+                        { text: "b) Góc $\\widehat{AMB} = 90^\\circ$.", ans: true },
+                        { text: "c) $AM$ là tia phân giác của góc $\\widehat{BAC}$.", ans: true },
+                        { text: "d) Góc $\\widehat{ABC} = 90^\\circ$.", ans: false }
+                    ]}
+                ],
+                part3: [
+                    { q: "Tính giá trị của biểu thức: $A = \\left(-\\frac{2}{3}\\right) + \\frac{5}{3} \\cdot \\frac{1}{2}$.", ans: "1/6" },
+                    { q: "Tìm $x$ biết: $|x - 2| = 5$ (nhập hai giá trị phân cách bằng dấu phẩy, ví dụ: 7,-3).", ans: "7,-3" },
+                    { q: "Cho hình lăng trụ đứng tam giác có diện tích đáy bằng $12\\text{ cm}^2$ và chiều cao $10\\text{ cm}$. Tính thể tích của hình lăng trụ đó (chỉ ghi số).", ans: "120" },
+                    { q: "Cho $\\Delta ABC$ có $\\widehat{A} = 70^\\circ$, hai tia phân giác của góc $B$ và $C$ cắt nhau tại $I$. Tính số đo góc $\\widehat{BIC}$ (chỉ ghi độ).", ans: "125" }
+                ],
+                part4: [
+                    { q: "<strong>Bài 1 (1,5 điểm).</strong><br>a) Thực hiện phép tính hợp lý: $\\frac{3}{7} \\cdot \\frac{19}{13} - \\frac{3}{7} \\cdot \\frac{6}{13}$.<br>b) Tìm $x$, biết: $2^x + 2^{x+3} = 144$.", guide: "a) $\\frac{3}{7} \\left(\\frac{19}{13} - \\frac{6}{13}\\right) = \\frac{3}{7} \\cdot 1 = \\frac{3}{7}$.<br>b) $2^x(1 + 8) = 144 \\Rightarrow 2^x = 16 \\Rightarrow x = 4$." },
+                    { q: "<strong>Bài 2 (1,0 điểm).</strong><br>Một chiếc hộp hình chữ nhật có chiều dài $20\\text{ cm}$, chiều rộng $15\\text{ cm}$ và chiều cao $10\\text{ cm}$.<br>a) Tính thể tích hình hộp chữ nhật đó.<br>b) Tính diện tích xung quanh của chiếc hộp.", guide: "a) $V = 20 \\cdot 15 \\cdot 10 = 3000\\text{ cm}^3$.<br>b) $S_{xq} = 2(20 + 15) \\cdot 10 = 700\\text{ cm}^2$." },
+                    { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Chứng minh rằng nếu $\\frac{a}{b} = \frac{c}{d}$ thì $\\frac{a+b}{a-b} = \\frac{c+d}{c-d}$ (với $a \\neq \\pm b, c \\neq \\pm d$).", guide: "Đặt $\\frac{a}{b} = \\frac{c}{d} = k \\Rightarrow a = kb, c = kd$ rồi thay vào hai vế." }
+                ]
+            },
+            "801": {
+                grade: 8,
+                part1: [
+                    { q: "Đơn thức nào sau đây đồng dạng với đơn thức $-3x^2y$?", opts: ["$5x^2y$", "$2xy^2$", "$-3xy$", "$4x^3y$"], ans: 0 },
+                    { q: "Khai triển hàng đẳng thức $(a + b)^2$ ta được kết quả là:", opts: ["$a^2 + 2ab + b^2$", "$a^2 - 2ab + b^2$", "$a^2 + b^2$", "$a^2 - b^2$"], ans: 0 },
+                    { q: "Biểu thức $x^2 - 9$ được viết dưới dạng tích là:", opts: ["$(x - 3)(x + 3)$", "$(x - 9)(x + 9)$", "$(x - 3)^2$", "$(x + 3)^2$"], ans: 0 },
+                    { q: "Kết quả của phép nhân $2x(x - 3)$ là:", opts: ["$2x^2 - 6x$", "$2x^2 - 3$", "$2x^2 + 6x$", "$x^2 - 6x$"], ans: 0 },
+                    { q: "Hình bình hành có hai đường chéo vuông góc với nhau là:", opts: ["Hình thoi", "Hình chữ nhật", "Hình thang cân", "Hình vuông"], ans: 0 },
+                    { q: "Tổng số đo các góc của một tứ giác bằng:", opts: ["$360^\\circ$", "$180^\\circ$", "$270^\\circ$", "$540^\\circ$"], ans: 0 },
+                    { q: "Tứ giác có hai cạnh đối song song là:", opts: ["Hình thang", "Hình bình hành", "Hình chữ nhật", "Hình thoi"], ans: 0 },
+                    { q: "Cho hình chữ nhật $ABCD$ có hai đường chéo $AC$ và $BD$ cắt nhau tại $O$. Khẳng định nào sau đây là sai?", opts: ["$AC \\perp BD$", "$AC = BD$", "$OA = OB = OC = OD$", "$AB // CD$"], ans: 0 },
+                    { q: "Phân thức $\\frac{A}{B}$ xác định khi:", opts: ["$B \\neq 0$", "$A \\neq 0$", "$A = B$", "$B > 0$"], ans: 0 },
+                    { q: "Thực hiện phép tính $\\frac{x}{x+1} + \\frac{1}{x+1}$ thu được kết quả là:", opts: ["$1$", "$\\frac{x+1}{2x+2}$", "$\\frac{x}{x+1}$", "$0$"], ans: 0 },
+                    { q: "Rút gọn phân thức $\\frac{2x+2y}{2}$ ta được:", opts: ["$x + y$", "$2(x+y)$", "$x + 2y$", "$2x + y$"], ans: 0 },
+                    { q: "Hình thoi có thêm điều kiện nào sau đây thì trở thành hình vuông?", opts: ["Có một góc vuông", "Có hai đường chéo bằng nhau", "Cả A và B đều đúng", "Có hai đường chéo vuông góc"], ans: 2 }
+                ],
+                part2: [
+                    { context: "Cho đa thức $P(x,y) = x^2 - 2xy + y^2 - 4$. Xét tính đúng sai của các phát biểu:", statements: [
+                        { text: "a) Đa thức $P(x,y)$ có thể biến đổi thành $(x - y)^2 - 4$.", ans: true },
+                        { text: "b) Phân tích $P(x,y)$ thành nhân tử ta được $(x - y - 2)(x - y + 2)$.", ans: true },
+                        { text: "c) Khi $x - y = 2$ thì $P(x,y) = 0$.", ans: true },
+                        { text: "d) Bậc của đa thức $P(x,y)$ bằng 4.", ans: false }
+                    ]},
+                    { context: "Cho hình bình hành $ABCD$. Gọi $E, F$ lần lượt là trung điểm của $AB$ và $CD$. Xét tính đúng sai:", statements: [
+                        { text: "a) Tứ giác $AECF$ là hình bình hành.", ans: true },
+                        { text: "b) $AF // EC$.", ans: true },
+                        { text: "c) $DE = BF$.", ans: true },
+                        { text: "d) $AC$ và $EF$ không cắt nhau.", ans: false }
+                    ]}
+                ],
+                part3: [
+                    { q: "Tính giá trị của biểu thức $A = x^2 - 4x + 4$ tại $x = 102$.", ans: "10000" },
+                    { q: "Tìm $x$ biết: $x^2 - 16 = 0$ (nhập hai nghiệm cách nhau bởi dấu phẩy, ví dụ: 4,-4).", ans: "4,-4" },
+                    { q: "Một hình chữ nhật có độ dài hai cạnh kề là $6\\text{ cm}$ và $8\\text{ cm}$. Tính độ dài đường chéo của hình chữ nhật đó (chỉ ghi số).", ans: "10" },
+                    { q: "Số mặt của một hình chóp tam giác đều là bao nhiêu?", ans: "4" }
+                ],
+                part4: [
+                    { q: "<strong>Bài 1 (1,5 điểm).</strong><br>a) Phân tích đa thức thành nhân tử: $x^2 - xy + 3x - 3y$.<br>b) Rút gọn biểu thức: $A = (x+2)^2 - (x-1)(x+1)$.", guide: "a) $x(x-y) + 3(x-y) = (x-y)(x+3)$.<br>b) $x^2 + 4x + 4 - (x^2 - 1) = 4x + 5$." },
+                    { q: "<strong>Bài 2 (1,0 điểm).</strong><br>Cho tam giác $ABC$ vuông tại $A$, đường trung tuyến $AM$. Gọi $D$ là trung điểm của $AB$, $E$ là điểm đối xứng với $M$ qua $D$.<br>a) Chứng minh tứ giác $AEBM$ là hình bình hành.<br>b) Chứng minh tứ giác $ADMC$ là hình thang vuông.", guide: "a) $D$ là trung điểm $AB$ và $EM \\Rightarrow AEBM$ là hình bình hành.<br>b) $MD // AC$ (đường trung bình) và $MD \\perp AB$." },
+                    { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Cho $x, y$ thỏa mãn $x^2 + 2y^2 + 2xy - 2y + 1 = 0$. Tính giá trị của biểu thức $M = (x+y)^{2026}$.", guide: "Biến đổi thành $(x+y)^2 + (y-1)^2 = 0 \\Rightarrow y=1, x=-1 \\Rightarrow M = 0$." }
+                ]
+            },
+            "901": {
+                grade: 9,
+                part1: [
+                    { q: "Căn bậc hai số học của số $a \\ge 0$ là:", opts: ["Số $\\sqrt{a}$", "Số $-\\sqrt{a}$", "Số $a^2$", "Số $\\pm \\sqrt{a}$"], ans: 0 },
+                    { q: "Biểu thức $\\sqrt{2x - 4}$ xác định khi và chỉ khi:", opts: ["$x \\ge 2$", "$x > 2$", "$x \\le 2$", "$x \\ge 0$"], ans: 0 },
+                    { q: "Kết quả của phép tính $\\sqrt{(-5)^2}$ là:", opts: ["$5$", "$-5$", "$\\pm 5$", "$25$"], ans: 0 },
+                    { q: "Rút gọn biểu thức $\\sqrt{8} - \\sqrt{2}$ ta được:", opts: ["$\\sqrt{2}$", "$2$", "$\\sqrt{6}$", "$2\\sqrt{2}$"], ans: 0 },
+                    { q: "Cho tam giác $ABC$ vuông tại $A$, đường cao $AH$. Hệ thức nào sau đây là đúng?", opts: ["$AH^2 = HB \\cdot HC$", "$AB^2 = AH \\cdot BC$", "$AH = HB \\cdot HC$", "$AC^2 = AH \\cdot BC$"], ans: 0 },
+                    { q: "Cho tam giác $ABC$ vuông tại $A$. Tỉ số lượng giác $\\sin B$ bằng:", opts: ["$\\frac{AC}{BC}$", "$\\frac{AB}{BC}$", "$\\frac{AC}{AB}$", "$\\frac{AB}{AC}$"], ans: 0 },
+                    { q: "Cho $\\alpha + \\beta = 90^\\circ$. Khẳng định nào sau đây là đúng?", opts: ["$\\sin \\alpha = \\cos \\beta$", "$\\sin \\alpha = \\sin \\beta$", "$\\tan \\alpha = \\tan \\beta$", "$\\cos \\alpha = \\cos \\beta$"], ans: 0 },
+                    { q: "Giá trị của $\\tan 45^\\circ$ bằng:", opts: ["$1$", "$\\frac{1}{2}$", "$\\frac{\\sqrt{3}}{2}$", "$\\sqrt{3}$"], ans: 0 },
+                    { q: "Cho tam giác $ABC$ vuông tại $A$ có $AB = 3\\text{ cm}, AC = 4\\text{ cm}$. Độ dài đường cao $AH$ là:", opts: ["$2{,}4\\text{ cm}$", "$5\\text{ cm}$", "$2{,}5\\text{ cm}$", "$1{,}2\\text{ cm}$"], ans: 0 },
+                    { q: "Trục căn thức ở mẫu của $\\frac{2}{\\sqrt{3}}$ ta được:", opts: ["$\\frac{2\\sqrt{3}}{3}$", "$\\frac{\\sqrt{3}}{2}$", "$\\frac{2}{3}$", "$2\\sqrt{3}$"], ans: 0 },
+                    { q: "Hệ thức lượng nào sau đây đúng với góc nhọn $\\alpha$?", opts: ["$\\tan \\alpha = \\frac{\\sin \\alpha}{\\cos \\alpha}$", "$\\sin^2 \\alpha - \\cos^2 \\alpha = 1$", "$\\tan \\alpha \\cdot \\cos \\alpha = 1$", "$\\sin \\alpha + \\cos \\alpha = 1$"], ans: 0 },
+                    { q: "Cho tam giác $ABC$ vuông tại $A$, biết $\\widehat{B} = 30^\\circ$ và $BC = 10\\text{ cm}$. Độ dài cạnh $AC$ là:", opts: ["$5\\text{ cm}$", "$5\\sqrt{3}\\text{ cm}$", "$10\\sqrt{3}\\text{ cm}$", "$2{,}5\\text{ cm}$"], ans: 0 }
+                ],
+                part2: [
+                    { context: "Cho biểu thức $P = \\left(\\frac{1}{\\sqrt{x}-1} + \\frac{1}{\\sqrt{x}+1}\\right) : \\frac{1}{x-1}$ với $x \\ge 0, x \\neq 1$. Xét tính đúng sai:", statements: [
+                        { text: "a) Điều kiện xác định của biểu thức $P$ là $x \\ge 0, x \\neq 1$.", ans: true },
+                        { text: "b) Biểu thức $\\frac{1}{\\sqrt{x}-1} + \\frac{1}{\\sqrt{x}+1} = \\frac{2\\sqrt{x}}{x-1}$.", ans: true },
+                        { text: "c) Kết quả rút gọn của $P$ là $2\\sqrt{x}$.", ans: true },
+                        { text: "d) Khi $x = 4$ thì $P = 16$.", ans: false }
+                    ]},
+                    { context: "Cho tam giác $ABC$ vuông tại $A$ có $AB = 6\\text{ cm}, AC = 8\\text{ cm}$. Kẻ đường cao $AH$. Xét tính đúng sai:", statements: [
+                        { text: "a) Độ dài cạnh $BC = 10\\text{ cm}$.", ans: true },
+                        { text: "b) Độ dài đường cao $AH = 4{,}8\\text{ cm}$.", ans: true },
+                        { text: "c) Độ dài hình chiếu $BH = 3{,}6\\text{ cm}$.", ans: true },
+                        { text: "d) Số đo góc $\\widehat{B}$ bằng $37^\\circ$.", ans: false }
+                    ]}
+                ],
+                part3: [
+                    { q: "Tính giá trị biểu thức: $A = \\left(\\sqrt{12} - 2\\sqrt{27} + 3\\sqrt{48}\\right) : \\sqrt{3}$.", ans: "8" },
+                    { q: "Tìm $x$ không âm biết: $\\sqrt{x} = 5$.", ans: "25" },
+                    { q: "Một cột đèn cao $7\\text{ m}$ có bóng trên mặt đất dài $4\\text{ m}$. Tính góc tạo bởi tia nắng mặt trời với mặt đất (làm tròn đến độ).", ans: "60" },
+                    { q: "Cho $\\tan \\alpha = 2$. Tính giá trị biểu thức $M = \\frac{\\sin \\alpha + \\cos \\alpha}{\\sin \\alpha - \\cos \\alpha}$.", ans: "3" }
+                ],
+                part4: [
+                    { q: "<strong>Bài 1 (1,5 điểm).</strong><br>a) Rút gọn biểu thức: $A = \\sqrt{(2-\\sqrt{5})^2} + \\sqrt{5}$.<br>b) Giải phương trình: $\\sqrt{4x - 20} + \\sqrt{x - 5} = 9$.", guide: "a) $|2-\\sqrt{5}| + \\sqrt{5} = \\sqrt{5}-2 + \\sqrt{5} = 2\\sqrt{5}-2$.<br>b) ĐK: $x \\ge 5 \\Rightarrow 2\\sqrt{x-5} + \\sqrt{x-5} = 9 \\Rightarrow 3\\sqrt{x-5} = 9 \\Rightarrow x = 14$." },
+                    { q: "<strong>Bài 2 (1,0 điểm).</strong><br>Cho tam giác $ABC$ vuông tại $A$, đường cao $AH$. Biết $BH = 4\\text{ cm}, CH = 9\\text{ cm}$.<br>a) Tính độ dài $AH$ và $AB$.<br>b) Tính số đo góc $B$ (làm tròn đến phút).", guide: "a) $AH^2 = BH \\cdot CH = 36 \\Rightarrow AH = 6\\text{ cm}$. $AB^2 = BH \\cdot BC = 4 \\cdot 13 = 52 \\Rightarrow AB = 2\\sqrt{13}\\text{ cm}$.<br>b) $\\tan B = \\frac{AH}{BH} = \\frac{6}{4} = 1.5 \\Rightarrow \\widehat{B} \\approx 56^\\circ 19'$." },
+                    { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Cho $x > 0$. Tìm giá trị nhỏ nhất của biểu thức $P = x + \\frac{4}{x} + 2026$.", guide: "Áp dụng BĐT BĐT Cùng-si (Cauchy) cho 2 số dương $x$ và $\\frac{4}{x}$: $x + \\frac{4}{x} \\ge 2\\sqrt{4} = 4 \\Rightarrow P \\ge 2030$. Dấu '=' khi $x = 2$." }
+                ]
             }
         };
 
@@ -560,8 +686,8 @@
             return array;
         }
 
-        // Tạo tự động 20 mã đề ngẫu nhiên (demo)
-        [6].forEach(grade => {
+        // Tạo tự động 20 mã đề ngẫu nhiên cho tất cả các khối (6, 7, 8, 9)
+        [6, 7, 8, 9].forEach(grade => {
             const baseCode = grade + "01";
             const baseExam = exams[baseCode];
             if(baseExam) {
