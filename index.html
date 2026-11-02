@@ -586,7 +586,7 @@
                 part4: [
                     { q: "<strong>Bài 1 (1,5 điểm).</strong><br>a) Thực hiện phép tính hợp lý: $\\frac{3}{7} \\cdot \\frac{19}{13} - \\frac{3}{7} \\cdot \\frac{6}{13}$.<br>b) Tìm $x$, biết: $2^x + 2^{x+3} = 144$.", guide: "a) $\\frac{3}{7} \\left(\\frac{19}{13} - \\frac{6}{13}\\right) = \\frac{3}{7} \\cdot 1 = \\frac{3}{7}$.<br>b) $2^x(1 + 8) = 144 \\Rightarrow 2^x = 16 \\Rightarrow x = 4$." },
                     { q: "<strong>Bài 2 (1,0 điểm).</strong><br>Một chiếc hộp hình chữ nhật có chiều dài $20\\text{ cm}$, chiều rộng $15\\text{ cm}$ và chiều cao $10\\text{ cm}$.<br>a) Tính thể tích hình hộp chữ nhật đó.<br>b) Tính diện tích xung quanh của chiếc hộp.", guide: "a) $V = 20 \\cdot 15 \\cdot 10 = 3000\\text{ cm}^3$.<br>b) $S_{xq} = 2(20 + 15) \\cdot 10 = 700\\text{ cm}^2$." },
-                    { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Chứng minh rằng nếu $\\frac{a}{b} = \frac{c}{d}$ thì $\\frac{a+b}{a-b} = \\frac{c+d}{c-d}$ (với $a \\neq \\pm b, c \\neq \\pm d$).", guide: "Đặt $\\frac{a}{b} = \\frac{c}{d} = k \\Rightarrow a = kb, c = kd$ rồi thay vào hai vế." }
+                    { q: "<strong>Bài 3 (0,5 điểm).</strong><br>Chứng minh rằng nếu $\\frac{a}{b} = \\frac{c}{d}$ thì $\\frac{a+b}{a-b} = \\frac{c+d}{c-d}$ (với $a \\neq \\pm b, c \\neq \\pm d$).", guide: "Đặt $\\frac{a}{b} = \\frac{c}{d} = k \\Rightarrow a = kb, c = kd$ rồi thay vào hai vế." }
                 ]
             },
             "801": {
@@ -712,19 +712,20 @@
         });
 
         function triggerMathRender() {
-            setTimeout(() => {
-                if (window.renderMathInElement) {
-                    renderMathInElement(document.body, {
-                        delimiters: [
-                            {left: '$$', right: '$$', display: true},
-                            {left: '$', right: '$', display: false},
-                            {left: '\\(', right: '\\)', display: false},
-                            {left: '\\[', right: '\\]', display: true}
-                        ],
-                        throwOnError : false
-                    });
-                }
-            }, 50);
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            } else {
+                // Đợi thêm 50ms nếu thư viện KaTeX chưa kịp tải xong
+                setTimeout(triggerMathRender, 50);
+            }
         }
 
         function handleLogin(e) {
